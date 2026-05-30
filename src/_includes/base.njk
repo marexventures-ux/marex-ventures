@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title | default("Marex Ventures | Premier AI Automation Agency") }}</title>
+  <meta name="description" content="{{ description | default('A premier custom software and automation agency helping B2B businesses streamline operations with custom tools, workflow automation, and team training.') }}">
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-100970211"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-100970211');
+  </script>
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="{{ title | default("Marex Ventures") }}">
+  <meta property="og:description" content="{{ description | default('A premier custom software and automation agency.') }}">
+  <meta property="og:image" content="{{ image | default('/assets/images/logo.png') }}">
+
+  <link rel="stylesheet" href="/css/global.css">
+  {% if extra_css %}
+  <style>
+    {{ extra_css | safe }}
+  </style>
+  {% endif %}
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/index.html" class="logo">
+        <img src="/assets/images/logo.png" alt="Marex Ventures Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/services.html" class="nav-link">Services</a></li>
+        <li><a href="/products.html" class="nav-link">Products</a></li>
+        <li><a href="/case-studies.html" class="nav-link">Case Studies</a></li>
+        <li><a href="/about.html" class="nav-link">About Us</a></li>
+      </ul>
+      <button class="menu-toggle">
+        <svg fill="currentColor" viewBox="0 0 20 20" width="24" height="24"><path fill-rule="evenodd" d="M3 5h14a1 1 0 110 2H3a1 1 0 010-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2z" clip-rule="evenodd"></path></svg>
+      </button>
+    </div>
+  </nav>
+
+  {{ content | safe }}
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <a href="/index.html" class="logo" style="margin-bottom: 1rem;">
+          <img src="/assets/images/logo.png" alt="Marex Ventures Logo">
+        </a>
+        <p style="max-width: 300px; color: var(--text-muted);">A growth systems company powering how modern businesses operate, automate, and scale.</p>
+      </div>
+      <div class="footer-links">
+        <h3 style="color: var(--accent-navy);">Offerings</h3>
+        <a href="/services.html">Custom Software</a>
+        <a href="/services.html">Custom Tools</a>
+        <a href="/services.html">Automation Systems</a>
+        <a href="/training.html">Trainings & Workshops</a>
+      </div>
+      <div class="footer-links">
+        <h3 style="color: var(--accent-navy);">Integrations</h3>
+        <a href="/integrations/zapier.html">Zapier Automation</a>
+        <a href="/integrations/make.html">Make.com Services</a>
+        <a href="/integrations/n8n.html">n8n Consulting</a>
+      </div>
+      <div class="footer-links">
+        <h3 style="color: var(--accent-navy);">Company</h3>
+        <a href="/about.html">About Us</a>
+        <a href="/about.html">Our Vision</a>
+        <a href="/founder.html">Meet the Founder</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Marex Ventures. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="/js/global.js"></script>
+</body>
+</html>

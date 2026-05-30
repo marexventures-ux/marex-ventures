@@ -1,0 +1,11 @@
+# Netlify Redirects
+# Format: /old-path /new-path 301
+
+/ai-digital-marketing-automation-agency/ /automation-systems.html 301
+/ai-digital-marketing-agency-in-nigeria/ /services.html 301
+/ai-powered-virtual-assistant-service-nigeria/ /automation-systems.html 301
+/revenue-clarity-report-nigeria/ /audit.html 301
+/ai-seo-auditor/ /custom-tools.html 301
+/ai-powered-facebook-ads-strategist/ /services.html 301
+/solo-african-ai-innovator/ /founder.html 301
+# Example: /category/services /services.html 301
