@@ -1,0 +1,13 @@
+---
+layout: base.njk
+---
+<section class="container section" style="padding-top: 150px; max-width: 800px; margin: 0 auto;">
+  <div class="floating-card" style="padding: 4rem; margin-bottom: 2rem;">
+    <a href="/blog/" style="display: inline-block; margin-bottom: 2rem; color: var(--accent-red); text-decoration: none; font-weight: 600;">&larr; Back to Blog</a>
+    <h1 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-navy);">{{ title }}</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 2rem;">Published by Marex Ventures</p>
+    <div class="blog-content" style="line-height: 1.8; color: var(--text-main); font-size: 1.1rem;">
+      {{ content | safe }}
+    </div>
+  </div>
+</section>
