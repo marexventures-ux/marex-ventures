@@ -15,6 +15,25 @@
   --shadow-hover: 0 20px 50px -12px rgba(11, 27, 50, 0.1);
 }
 
+[data-theme="dark"] {
+  --bg-color: #0B1B32;
+  --surface-color: #112542;
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --accent-navy: #FFFFFF;
+  --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .logo img {
+  filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .navbar.scrolled {
+  background: rgba(11, 27, 50, 0.95);
+}
+
 * {
   margin: 0;
   padding: 0;

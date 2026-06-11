@@ -11,20 +11,20 @@ description: ""
         Fill out the form below to book a consultation. Our team will review your current systems and design a custom software or automation strategy tailored to your exact workflows.
       </p>
       
-      <form onsubmit="event.preventDefault(); alert('Consultation Request Sent Successfully!'); window.location.href='index.html';">
+      <form name="consultation" method="POST" data-netlify="true" action="/index.html">
         <div class="form-group">
           <label>Name</label>
-          <input type="text" class="form-control" required placeholder="John Doe">
+          <input type="text" name="name" class="form-control" required placeholder="John Doe">
         </div>
         
         <div class="form-group">
           <label>Business Type</label>
-          <input type="text" class="form-control" required placeholder="e.g., Marketing Agency, E-Commerce, SaaS">
+          <input type="text" name="business_type" class="form-control" required placeholder="e.g., Marketing Agency, E-Commerce, SaaS">
         </div>
         
         <div class="form-group">
           <label>Service of Interest</label>
-          <select class="form-control" required>
+          <select name="service_interest" class="form-control" required>
             <option value="">Select a service...</option>
             <option value="automation">Automation Systems</option>
             <option value="custom_tools">Custom Tools</option>
@@ -35,12 +35,12 @@ description: ""
         
         <div class="form-group">
           <label>Project Details (Optional)</label>
-          <textarea class="form-control" rows="5" placeholder="Describe your project, workflows, or what you're looking to achieve..."></textarea>
+          <textarea name="project_details" class="form-control" rows="5" placeholder="Describe your project, workflows, or what you're looking to achieve..."></textarea>
         </div>
         
         <div class="form-group">
           <label>Budget (Optional)</label>
-          <select class="form-control">
+          <select name="budget" class="form-control">
             <option value="">Select your budget range...</option>
             <option value="under_1m">Under ₦1,000,000</option>
             <option value="1m_to_5m">₦1,000,000 - ₦5,000,000</option>

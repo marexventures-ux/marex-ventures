@@ -17,9 +17,40 @@
   </script>
 
   <!-- Open Graph / Social -->
-  <meta property="og:title" content="{{ title | default("Marex Ventures") }}">
+  <meta property="og:title" content="{{ title | default('Marex Ventures') }}">
   <meta property="og:description" content="{{ description | default('A premier custom software and automation agency.') }}">
   <meta property="og:image" content="{{ image | default('/assets/images/logo.png') }}">
+
+  <!-- Dynamic JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    {% if page.url and "/blog/" in page.url %}
+    "@type": "Article",
+    "headline": "{{ title }}",
+    "description": "{{ description }}",
+    "image": "{{ image | default('https://marexventures.com/assets/images/logo.png') }}",
+    "datePublished": "{{ date }}",
+    "author": {
+      "@type": "Person",
+      "name": "Mary Mmoh"
+    },
+    {% else %}
+    "@type": "Organization",
+    "name": "Marex Ventures",
+    "url": "https://marexventures.com",
+    "logo": "https://marexventures.com/assets/images/logo.png",
+    {% endif %}
+    "publisher": {
+      "@type": "Organization",
+      "name": "Marex Ventures",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://marexventures.com/assets/images/logo.png"
+      }
+    }
+  }
+  </script>
 
   <link rel="stylesheet" href="/css/global.css">
   {% if extra_css %}
@@ -42,10 +73,16 @@
         <li><a href="/products.html" class="nav-link">Products</a></li>
         <li><a href="/case-studies.html" class="nav-link">Case Studies</a></li>
         <li><a href="/about.html" class="nav-link">About Us</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
       </ul>
-      <button class="menu-toggle">
-        <svg fill="currentColor" viewBox="0 0 20 20" width="24" height="24"><path fill-rule="evenodd" d="M3 5h14a1 1 0 110 2H3a1 1 0 010-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2z" clip-rule="evenodd"></path></svg>
-      </button>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="theme-toggle" aria-label="Toggle Dark Mode" style="background: transparent; border: none; cursor: pointer; color: var(--accent-navy); display: flex; align-items: center;">
+          <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="menu-toggle">
+          <svg fill="currentColor" viewBox="0 0 20 20" width="24" height="24"><path fill-rule="evenodd" d="M3 5h14a1 1 0 110 2H3a1 1 0 010-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2z" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
     </div>
   </nav>
 
