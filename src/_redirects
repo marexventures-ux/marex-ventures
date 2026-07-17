@@ -9,3 +9,6 @@
 /ai-powered-facebook-ads-strategist/ /services.html 301
 /solo-african-ai-innovator/ /founder.html 301
 # Example: /category/services /services.html 301
+
+/products.html /services.html 301
+/products /services 301

@@ -125,15 +125,27 @@ p {
 
 .btn-secondary {
   background: #fff;
-  color: var(--accent-navy);
+  color: #0b1b32;
   border: 1px solid var(--glass-border);
   box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent-navy);
-  background: var(--bg-color);
+  border-color: #0b1b32;
+  background: #f8fafc;
   transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: var(--surface-color);
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  border-color: var(--accent-red);
+  background: var(--bg-color);
+  color: var(--accent-red);
 }
 
 .floating-card {
@@ -235,12 +247,17 @@ footer {
   border-top: 1px solid var(--glass-border);
   padding: 4rem 0 2rem;
   background: #fff;
+  transition: var(--transition);
+}
+
+[data-theme="dark"] footer {
+  background: var(--surface-color);
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.2fr;
+  gap: 2rem;
   margin-bottom: 3rem;
 }
 
@@ -283,6 +300,7 @@ footer {
 @media (max-width: 768px) {
   h1 { font-size: 2.5rem; }
   .grid-cols-2, .grid-cols-3, .grid-cols-4, .footer-grid { grid-template-columns: 1fr; }
+  .nav-cta { display: none; }
   .nav-links {
     position: fixed;
     top: 70px;
@@ -293,6 +311,9 @@ footer {
     flex-direction: column;
     justify-content: center;
     transition: 0.5s ease;
+  }
+  [data-theme="dark"] .nav-links {
+    background: var(--bg-color);
   }
   .nav-links.active { left: 0; }
   .menu-toggle { display: block; }
@@ -352,11 +373,12 @@ footer {
 .form-control {
   width: 100%;
   padding: 1rem;
-  background: #fff;
+  background: var(--bg-color);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   color: var(--text-main);
   font-family: var(--font-body);
+  transition: var(--transition);
 }
 .form-control:focus {
   outline: none;
@@ -402,7 +424,7 @@ footer {
   opacity: 0.5;
 }
 .philosophy-banner {
-  background: linear-gradient(135deg, var(--accent-navy) 0%, #1a2a44 100%);
+  background: linear-gradient(135deg, #0B1B32 0%, #1a2a44 100%);
   border-radius: 24px;
   padding: 4rem 3rem;
   text-align: center;
@@ -451,3 +473,81 @@ footer {
 .blog-content li { margin-bottom: 0.5rem; }
 .blog-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 2rem 0; box-shadow: var(--shadow-soft); }
 .blog-content a { color: var(--accent-red); text-decoration: underline; }
+
+/* Custom Additions for Dark Mode Contrast fixes */
+.badge-tag {
+  display: inline-block;
+  background: var(--surface-color);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.badge-tag-lg {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.badge-tag-sm {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+}
+
+.btn-back {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  transition: var(--transition);
+}
+
+.btn-back:hover {
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+  transform: translateX(-3px);
+}
+
+.navy-banner {
+  background: linear-gradient(135deg, #0B1B32 0%, #1a2a44 100%);
+  border-radius: 24px;
+  padding: 5rem 3rem;
+  text-align: center;
+  margin: 4rem 0;
+  box-shadow: 0 20px 40px rgba(11, 27, 50, 0.2);
+  position: relative;
+}
+
+.pill-tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+.pill-tag-navy {
+  background: rgba(11, 27, 50, 0.05);
+  color: var(--accent-navy);
+  border: 1px solid var(--glass-border);
+}
+
+[data-theme="dark"] .pill-tag-navy {
+  background: var(--surface-color);
+  color: var(--text-main);
+}
+
+.pill-tag-red {
+  background: rgba(229, 37, 40, 0.1);
+  color: var(--accent-red);
+}
