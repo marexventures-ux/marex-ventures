@@ -551,3 +551,39 @@ footer {
   background: rgba(229, 37, 40, 0.1);
   color: var(--accent-red);
 }
+
+/* Mobile CTA Drawer styles */
+.mobile-cta-wrapper {
+  display: none;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta-wrapper {
+    display: block;
+  }
+}
+
+/* Social Links styles */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  color: var(--text-muted);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.social-icon:hover {
+  color: var(--accent-red);
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
