@@ -1,0 +1,19 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for item in collections.all %}
+  {%- if item.url and not item.data.eleventyExcludeFromCollections and not "/admin" in item.url and not "/_redirects" in item.url %}
+  <url>
+    <loc>https://marexventures.com{{ item.url }}</loc>
+    {%- if item.date %}
+    <lastmod>{{ item.date.toISOString() }}</lastmod>
+    {%- endif %}
+    <changefreq>{% if item.url == "/" %}daily{% elif "/blog" in item.url %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if item.url == "/" %}1.0{% elif item.url == "/services.html" or item.url == "/founder.html" %}0.9{% else %}0.8{% endif %}</priority>
+  </url>
+  {%- endif %}
+{%- endfor %}
+</urlset>

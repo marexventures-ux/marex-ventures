@@ -16,31 +16,48 @@
     gtag('config', 'G-100970211');
   </script>
 
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="{{ title | default('Marex Ventures') }}">
-  <meta property="og:description" content="{{ description | default('A premier custom software and automation agency.') }}">
-  <meta property="og:image" content="{{ image | default('/assets/images/logo.png') }}">
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://marexventures.com{{ page.url }}">
 
-  <!-- Dynamic JSON-LD Schema -->
+  <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+  <meta property="og:type" content="{% if page.url and '/blog/' in page.url and page.url != '/blog/' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="https://marexventures.com{{ page.url }}">
+  <meta property="og:title" content="{{ title | default('Marex Ventures | Custom Software & Automation Agency') }}">
+  <meta property="og:description" content="{{ description | default('A premier custom software and automation agency helping B2B businesses streamline operations with custom tools, workflow automation, and team training.') }}">
+  <meta property="og:image" content="{{ image | default('https://marexventures.com/assets/images/logo.png') }}">
+  <meta property="og:site_name" content="Marex Ventures">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@marexventure">
+  <meta name="twitter:creator" content="@marexventure">
+  <meta name="twitter:url" content="https://marexventures.com{{ page.url }}">
+  <meta name="twitter:title" content="{{ title | default('Marex Ventures | Custom Software & Automation Agency') }}">
+  <meta name="twitter:description" content="{{ description | default('A premier custom software and automation agency helping B2B businesses streamline operations with custom tools, workflow automation, and team training.') }}">
+  <meta name="twitter:image" content="{{ image | default('https://marexventures.com/assets/images/logo.png') }}">
+
+  <!-- Google Search Console Verification Meta Tag -->
+  <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE"> -->
+
+  <!-- Dynamic JSON-LD Schema (Rank-Math Grade) -->
   <script type="application/ld+json">
+  {% if page.url and "/blog/" in page.url and page.url != "/blog/" %}
   {
     "@context": "https://schema.org",
-    {% if page.url and "/blog/" in page.url %}
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://marexventures.com{{ page.url }}"
+    },
     "headline": "{{ title }}",
     "description": "{{ description }}",
     "image": "{{ image | default('https://marexventures.com/assets/images/logo.png') }}",
     "datePublished": "{{ date }}",
     "author": {
       "@type": "Person",
-      "name": "Mary Mmoh"
+      "name": "Mary Mmoh",
+      "url": "https://marexventures.com/founder.html"
     },
-    {% else %}
-    "@type": "Organization",
-    "name": "Marex Ventures",
-    "url": "https://marexventures.com",
-    "logo": "https://marexventures.com/assets/images/logo.png",
-    {% endif %}
     "publisher": {
       "@type": "Organization",
       "name": "Marex Ventures",
@@ -50,6 +67,30 @@
       }
     }
   }
+  {% else %}
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Marex Ventures",
+    "url": "https://marexventures.com",
+    "logo": "https://marexventures.com/assets/images/logo.png",
+    "image": "https://marexventures.com/assets/images/logo.png",
+    "description": "Custom software development, robust workflow automation, and AI systems agency.",
+    "founder": {
+      "@type": "Person",
+      "name": "Mary Mmoh",
+      "url": "https://marexventures.com/founder.html"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/marex-ventures",
+      "https://x.com/marexventure",
+      "https://www.instagram.com/marexventure/",
+      "https://web.facebook.com/MarexxVenture/",
+      "https://www.tiktok.com/@marexventures",
+      "https://www.pinterest.com/marexventure/"
+    ]
+  }
+  {% endif %}
   </script>
 
   <link rel="stylesheet" href="/css/global.css">

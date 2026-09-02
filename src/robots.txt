@@ -1,0 +1,6 @@
+# Robots.txt for Marex Ventures
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://marexventures.com/sitemap.xml
