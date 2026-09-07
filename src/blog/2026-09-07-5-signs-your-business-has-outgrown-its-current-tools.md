@@ -1,5 +1,5 @@
 ---
-title: 5 Signs Your Business Has Outgrown Its Current Tools
+title: 5 Signs Your Business Needs Automation
 date: 2026-09-07T10:47:00.000+01:00
 image: /assets/images/signs-your-business-needs-automation.png
 description: Are manual tasks slowing your business down? Here are 5 signs your
@@ -12,7 +12,7 @@ permalink: /signs-your-business-needs-automation/
 ---
 Your business doesn't have to be huge before your tools start holding you back.
 
-You might already use Google Workspace, a CRM, spreadsheets, WhatsApp, accounting software, project management tools, or other digital platforms. On paper, everything looks organized.
+You might already use [Google Workspace](https://workspace.google.com/), a CRM, spreadsheets, WhatsApp, accounting software, project management tools, or other digital platforms. On paper, everything looks organized.
 
 But behind the scenes, your team may still be copying information from one place to another, sending manual reminders, checking spreadsheets for updates, or waiting for one person to complete a task before the next person can move.
 
@@ -46,7 +46,7 @@ The goal isn't to remove people from the process.
 
 It's to remove unnecessary repetition.
 
-## 2. Your business depends on one person remembering to do something
+## 2. [Your business depends on one person remembering to do something](https://www.atlassian.com/work-management/knowledge-sharing/documentation/process-documentation)
 
 Ask yourself:
 
@@ -64,7 +64,7 @@ That's risky.
 
 A good business system should not depend entirely on someone's memory.
 
-Automation can handle repeatable steps in the background so the workflow keeps moving even when a particular team member is unavailable.
+[Automation](https://marexventures.com/automation-systems/) can handle repeatable steps in the background so the workflow keeps moving even when a particular team member is unavailable.
 
 This doesn't mean every task should be automated.
 
@@ -224,9 +224,9 @@ The business has more software but not necessarily a better system.
 
 At Marex Ventures, the starting point is different.
 
-We first look at how the business actually operates: the processes, the tools being used, the handoffs between people, and where repetitive manual work is happening.
+We first look at [how the business actually operates:](https://marexventures.com/audit/) the processes, the tools being used, the handoffs between people, and where repetitive manual work is happening.
 
-The goal is to identify where automation or custom software can actually make a difference before building anything.
+The goal is to identify where automation or [custom software](https://marexventures.com/custom-tools/) can actually make a difference before building anything.
 
 The resulting Systems Blueprint can include a system architecture diagram, an ROI projection, and a prioritized automation list.
 
