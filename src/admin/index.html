@@ -6,102 +6,6 @@
     <title>Marex Ventures — Content & SEO Manager</title>
     <link rel="icon" type="image/png" href="/assets/images/logo.png">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <style>
-      /* Rank Math SEO Dashboard Styles inside Preview */
-      .seo-box {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 30px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      }
-      .seo-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 2px solid #f1f5f9;
-        padding-bottom: 16px;
-        margin-bottom: 20px;
-      }
-      .seo-score-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: white;
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-      }
-      .serp-preview {
-        background: #ffffff;
-        border: 1px solid #dfe1e5;
-        border-radius: 8px;
-        padding: 16px;
-        margin: 20px 0;
-        max-width: 600px;
-      }
-      .serp-url {
-        font-size: 0.85rem;
-        color: #202124;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 4px;
-      }
-      .serp-title {
-        font-size: 1.25rem;
-        color: #1a0dab;
-        text-decoration: none;
-        font-weight: 400;
-        line-height: 1.3;
-        cursor: pointer;
-        display: block;
-        margin-bottom: 4px;
-      }
-      .serp-desc {
-        font-size: 0.88rem;
-        color: #4d5156;
-        line-height: 1.4;
-      }
-      .checklist-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 10px 0;
-        border-bottom: 1px solid #f8fafc;
-        font-size: 0.95rem;
-      }
-      .checklist-icon {
-        font-size: 1.1rem;
-        font-weight: bold;
-        flex-shrink: 0;
-      }
-      .checklist-pass { color: #10b981; }
-      .checklist-fail { color: #ef4444; }
-      .checklist-tip {
-        font-size: 0.8rem;
-        color: #64748b;
-        margin-top: 3px;
-      }
-      .article-preview-body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        line-height: 1.8;
-        color: #1e293b;
-        font-size: 1.1rem;
-        padding: 20px 0;
-      }
-      .article-preview-body img {
-        max-width: 100%;
-        border-radius: 8px;
-      }
-    </style>
   </head>
   <body>
     <!-- Decap CMS Core -->
@@ -109,255 +13,262 @@
 
     <!-- Custom Rank Math SEO & Live SERP Preview Template -->
     <script>
-      const h = React.createElement;
-
-      const BlogSEOPreview = function(props) {
-        const entry = props.entry;
-        const title = entry.getIn(['data', 'title']) || '';
-        const description = entry.getIn(['data', 'description']) || '';
-        const focusKeyword = (entry.getIn(['data', 'focus_keyword']) || '').trim().toLowerCase();
-        const permalink = entry.getIn(['data', 'permalink']) || '';
-        const isPillar = entry.getIn(['data', 'is_pillar']) || false;
-        const body = entry.getIn(['data', 'body']) || '';
-        const image = entry.getIn(['data', 'image']);
-
-        // Word count & Content analysis
-        const cleanText = body.replace(/[#*`_\[\]()\-]/g, ' ');
-        const words = cleanText.trim().split(/\s+/).filter(Boolean);
-        const wordCount = words.length;
-
-        // Keyword calculations
-        let keywordCount = 0;
-        let inTitle = false;
-        let inDesc = false;
-        let inSlug = false;
-        let inFirst10 = false;
-        let inHeadings = false;
-        let hasInternalLinks = false;
-        let hasExternalLinks = false;
-        let keywordDensity = 0;
-
-        if (focusKeyword) {
-          // Check title
-          inTitle = title.toLowerCase().includes(focusKeyword);
-
-          // Check description
-          inDesc = description.toLowerCase().includes(focusKeyword);
-
-          // Check slug/permalink
-          const slugToCheck = permalink ? permalink.toLowerCase() : title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-          inSlug = slugToCheck.includes(focusKeyword.replace(/\s+/g, '-'));
-
-          // Check first 10%
-          const first10Percent = cleanText.substring(0, Math.floor(cleanText.length * 0.15)).toLowerCase();
-          inFirst10 = first10Percent.includes(focusKeyword);
-
-          // Check in subheadings
-          const headings = (body.match(/^#{2,4}\s+.+$/gm) || []).join(' ').toLowerCase();
-          inHeadings = headings.includes(focusKeyword);
-
-          // Keyword count & density
-          const regex = new RegExp('\\b' + focusKeyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\b', 'gi');
-          const matches = body.match(regex);
-          keywordCount = matches ? matches.length : 0;
-          keywordDensity = wordCount > 0 ? ((keywordCount * focusKeyword.split(/\s+/).length) / wordCount * 100).toFixed(1) : 0;
+      (function() {
+        if (typeof CMS === 'undefined' || typeof createClass === 'undefined' || typeof h === 'undefined') {
+          return;
         }
 
-        // Links check
-        hasInternalLinks = /marexventures\.com|\/services|\/contact|\/about|\/audit|\/case-studies/i.test(body);
-        hasExternalLinks = /https?:\/\/(?!marexventures\.com)[^\s)]+/i.test(body);
+        var BlogSEOPreview = createClass({
+          render: function() {
+            var entry = this.props.entry;
+            var title = entry.getIn(['data', 'title']) || '';
+            var description = entry.getIn(['data', 'description']) || '';
+            var focusKeyword = (entry.getIn(['data', 'focus_keyword']) || '').trim().toLowerCase();
+            var permalink = entry.getIn(['data', 'permalink']) || '';
+            var isPillar = entry.getIn(['data', 'is_pillar']) || false;
+            var body = entry.getIn(['data', 'body']) || '';
+            var image = entry.getIn(['data', 'image']);
 
-        // Scoring algorithm (Rank Math formula)
-        let score = 0;
+            // Word count calculation
+            var cleanText = body.replace(/[#*`_\[\]()\-]/g, ' ');
+            var words = cleanText.trim().split(/\s+/).filter(Boolean);
+            var wordCount = words.length;
 
-        // 1. Keyword in Title (15 pts)
-        if (inTitle) score += 15;
+            // Scoring flags
+            var inTitle = false;
+            var inDesc = false;
+            var inSlug = false;
+            var inFirst10 = false;
+            var inHeadings = false;
+            var hasInternalLinks = false;
+            var hasExternalLinks = false;
+            var keywordDensity = 0;
+            var keywordCount = 0;
 
-        // 2. Keyword in Meta Description (15 pts)
-        if (inDesc) score += 15;
+            if (focusKeyword) {
+              inTitle = title.toLowerCase().indexOf(focusKeyword) !== -1;
+              inDesc = description.toLowerCase().indexOf(focusKeyword) !== -1;
 
-        // 3. Keyword in URL (10 pts)
-        if (inSlug) score += 10;
+              var slugToCheck = permalink ? permalink.toLowerCase() : title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+              inSlug = slugToCheck.indexOf(focusKeyword.replace(/\s+/g, '-')) !== -1;
 
-        // 4. Keyword in First 10% (10 pts)
-        if (inFirst10) score += 10;
+              var first10Len = Math.floor(cleanText.length * 0.15);
+              var first10Text = cleanText.substring(0, first10Len).toLowerCase();
+              inFirst10 = first10Text.indexOf(focusKeyword) !== -1;
 
-        // 5. Content Length (15 pts)
-        const targetWords = isPillar ? 1000 : 600;
-        if (wordCount >= targetWords) {
-          score += 15;
-        } else if (wordCount >= (targetWords / 2)) {
-          score += 8;
-        } else if (wordCount > 100) {
-          score += 4;
-        }
+              var headingMatches = body.match(/^#{2,4}\s+.+$/gm) || [];
+              inHeadings = headingMatches.join(' ').toLowerCase().indexOf(focusKeyword) !== -1;
 
-        // 6. Keyword in Subheadings (10 pts)
-        if (inHeadings) score += 10;
+              try {
+                var escaped = focusKeyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                var regex = new RegExp('\\b' + escaped + '\\b', 'gi');
+                var matches = body.match(regex);
+                keywordCount = matches ? matches.length : 0;
+                keywordDensity = wordCount > 0 ? ((keywordCount * focusKeyword.split(/\s+/).length) / wordCount * 100).toFixed(1) : 0;
+              } catch(e) {
+                keywordCount = 0;
+              }
+            }
 
-        // 7. Keyword Density (10 pts)
-        if (keywordDensity >= 0.7 && keywordDensity <= 3.0) {
-          score += 10;
-        } else if (keywordCount > 0) {
-          score += 5;
-        }
+            hasInternalLinks = /marexventures\.com|\/services|\/contact|\/about|\/audit|\/case-studies/i.test(body);
+            hasExternalLinks = /https?:\/\/(?!marexventures\.com)[^\s)]+/i.test(body);
 
-        // 8. Internal Links (5 pts)
-        if (hasInternalLinks) score += 5;
+            // Calculate Score (0-100)
+            var score = 0;
+            if (inTitle) score += 15;
+            if (inDesc) score += 15;
+            if (inSlug) score += 10;
+            if (inFirst10) score += 10;
 
-        // 9. External Links (5 pts)
-        if (hasExternalLinks) score += 5;
+            var targetWords = isPillar ? 1000 : 600;
+            if (wordCount >= targetWords) {
+              score += 15;
+            } else if (wordCount >= (targetWords / 2)) {
+              score += 8;
+            } else if (wordCount > 100) {
+              score += 4;
+            }
 
-        // 10. Featured Image (5 pts)
-        if (image) score += 5;
+            if (inHeadings) score += 10;
+            if (keywordDensity >= 0.7 && keywordDensity <= 3.0) {
+              score += 10;
+            } else if (keywordCount > 0) {
+              score += 5;
+            }
+            if (hasInternalLinks) score += 5;
+            if (hasExternalLinks) score += 5;
+            if (image) score += 5;
 
-        // Score color
-        let scoreBg = '#ef4444'; // Red
-        let scoreLabel = 'Needs Optimization';
-        if (score >= 80) {
-          scoreBg = '#10b981'; // Green
-          scoreLabel = 'Rank Math 100 Ready!';
-        } else if (score >= 50) {
-          scoreBg = '#f59e0b'; // Yellow/Orange
-          scoreLabel = 'Good / Needs A Few Tweaks';
-        }
+            var scoreBg = '#ef4444'; // Red
+            var scoreLabel = 'Needs Optimization';
+            if (score >= 80) {
+              scoreBg = '#10b981'; // Green
+              scoreLabel = 'Rank Math 100 Ready!';
+            } else if (score >= 50) {
+              scoreBg = '#f59e0b'; // Yellow
+              scoreLabel = 'Good (Needs A Few Tweaks)';
+            }
 
-        // Effective URL display
-        const displayUrl = permalink ? ('https://marexventures.com' + (permalink.startsWith('/') ? '' : '/') + permalink) : ('https://marexventures.com/blog/' + (title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50) : 'your-post-url') + '/');
+            var displayUrl = permalink 
+              ? ('https://marexventures.com' + (permalink.indexOf('/') === 0 ? '' : '/') + permalink) 
+              : ('https://marexventures.com/blog/' + (title ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50) : 'your-post-url') + '/');
 
-        return h('div', { style: { padding: '24px', maxWidth: '850px', margin: '0 auto' } },
-          // SEO Box Card
-          h('div', { className: 'seo-box' },
-            h('div', { className: 'seo-header' },
-              h('div', null,
-                h('h2', { style: { margin: '0 0 6px 0', color: '#0f172a', fontSize: '1.4rem' } }, '⚡ Rank Math SEO Score'),
-                h('div', { style: { color: '#64748b', fontSize: '0.9rem' } },
-                  focusKeyword ? ('Optimizing for: "' + focusKeyword + '"' + (isPillar ? ' (Pillar Content Guide)' : '')) : '⚠️ Enter a Focus Keyword in the left sidebar to start scoring'
-                )
-              ),
-              h('div', { style: { textAlign: 'center' } },
-                h('div', { className: 'seo-score-badge', style: { backgroundColor: scoreBg } }, score + '/100'),
-                h('div', { style: { fontSize: '0.75rem', fontWeight: 'bold', color: scoreBg, marginTop: '4px' } }, scoreLabel)
-              )
-            ),
+            var imageAsset = image ? this.props.getAsset(image) : null;
 
-            // Google Search Appearance SERP Simulation
-            h('div', null,
-              h('strong', { style: { fontSize: '0.95rem', color: '#334155' } }, 'Google Search Appearance Preview:'),
-              h('div', { className: 'serp-preview' },
-                h('div', { className: 'serp-url' },
-                  h('img', { src: '/assets/images/logo.png', style: { width: '16px', height: '16px', borderRadius: '50%' } }),
-                  h('span', null, displayUrl)
-                ),
-                h('div', { className: 'serp-title' }, title || 'Your Article Title Links Here | Marex Ventures'),
-                h('div', { className: 'serp-desc' }, description || 'Add an SEO Meta Description in the sidebar to control exactly what searchers read on Google results.')
-              ),
-              h('div', { style: { display: 'flex', gap: '20px', fontSize: '0.8rem', color: '#64748b', marginBottom: '15px' } },
-                h('span', null, 'Title length: ' + title.length + ' / 60 chars ' + (title.length > 60 ? '⚠️ (Truncated on Google)' : '✅')),
-                h('span', null, 'Meta description: ' + description.length + ' / 160 chars ' + (description.length > 160 ? '⚠️ (Too long)' : (description.length >= 120 ? '✅ Ideal' : 'ℹ️ (Recommended 120-160)')))
-              )
-            ),
-
-            // Diagnostic Checklist
-            h('div', { style: { marginTop: '20px' } },
-              h('strong', { style: { fontSize: '0.95rem', color: '#334155' } }, 'Rank Math Ranking Factor Checklist:'),
+            return h('div', { style: { padding: '24px', maxWidth: '850px', margin: '0 auto', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' } },
               
-              // 1. Title
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (inTitle ? 'checklist-pass' : 'checklist-fail') }, inTitle ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Focus Keyword in SEO Title'),
-                  h('div', { className: 'checklist-tip' }, inTitle ? 'Passed! Your keyword appears in the title link.' : 'Add your exact focus keyword to the Title for Google title-matching.')
-                )
+              // Injected CSS inside iframe
+              h('style', {}, 
+                '.rm-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }' +
+                '.rm-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 16px; margin-bottom: 20px; }' +
+                '.rm-score { display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: white; width: 68px; height: 68px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }' +
+                '.rm-serp { background: #ffffff; border: 1px solid #dfe1e5; border-radius: 8px; padding: 16px; margin: 18px 0; }' +
+                '.rm-serp-url { font-size: 0.82rem; color: #202124; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }' +
+                '.rm-serp-title { font-size: 1.25rem; color: #1a0dab; line-height: 1.3; margin-bottom: 4px; font-weight: 400; }' +
+                '.rm-serp-desc { font-size: 0.88rem; color: #4d5156; line-height: 1.4; }' +
+                '.rm-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f8fafc; font-size: 0.95rem; }' +
+                '.rm-pass { color: #10b981; font-weight: bold; font-size: 1.1rem; }' +
+                '.rm-fail { color: #ef4444; font-weight: bold; font-size: 1.1rem; }' +
+                '.rm-tip { font-size: 0.8rem; color: #64748b; margin-top: 3px; }' +
+                '.rm-article { line-height: 1.8; color: #1e293b; font-size: 1.1rem; padding: 20px 0; border-top: 2px solid #e2e8f0; margin-top: 30px; }' +
+                '.rm-article img { max-width: 100%; border-radius: 8px; }'
               ),
 
-              // 2. Description
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (inDesc ? 'checklist-pass' : 'checklist-fail') }, inDesc ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Focus Keyword in Meta Description'),
-                  h('div', { className: 'checklist-tip' }, inDesc ? 'Passed! Keyword appears in search snippet.' : 'Include your focus keyword in the SEO Meta Description field.')
-                )
-              ),
+              // SEO Card
+              h('div', { className: 'rm-box' },
+                h('div', { className: 'rm-header' },
+                  h('div', null,
+                    h('h2', { style: { margin: '0 0 6px 0', color: '#0f172a', fontSize: '1.4rem' } }, '⚡ Rank Math SEO Score'),
+                    h('div', { style: { color: '#64748b', fontSize: '0.9rem' } },
+                      focusKeyword 
+                        ? ('Optimizing for: "' + focusKeyword + '"' + (isPillar ? ' (Pillar Guide)' : ''))
+                        : '⚠️ Enter a Focus Keyword in the left sidebar to calculate your score'
+                    )
+                  ),
+                  h('div', { style: { textAlign: 'center' } },
+                    h('div', { className: 'rm-score', style: { backgroundColor: scoreBg } }, score + '/100'),
+                    h('div', { style: { fontSize: '0.75rem', fontWeight: 'bold', color: scoreBg, marginTop: '4px' } }, scoreLabel)
+                  )
+                ),
 
-              // 3. URL Slug
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (inSlug ? 'checklist-pass' : 'checklist-fail') }, inSlug ? '✔' : '✖'),
+                // Google SERP Box
                 h('div', null,
-                  h('strong', null, 'Focus Keyword in URL Permalink'),
-                  h('div', { className: 'checklist-tip' }, inSlug ? 'Passed! Keyword is in the URL slug.' : 'Use the Custom URL Permalink field to include your keyword in the web address.')
-                )
-              ),
+                  h('strong', { style: { fontSize: '0.95rem', color: '#334155' } }, 'Google Search Appearance Preview:'),
+                  h('div', { className: 'rm-serp' },
+                    h('div', { className: 'rm-serp-url' },
+                      h('img', { src: '/assets/images/logo.png', style: { width: '16px', height: '16px', borderRadius: '50%' } }),
+                      h('span', null, displayUrl)
+                    ),
+                    h('div', { className: 'rm-serp-title' }, title || 'Your Article Title Links Here | Marex Ventures'),
+                    h('div', { className: 'rm-serp-desc' }, description || 'Add an SEO Meta Description in the sidebar to control your Google search snippet.')
+                  ),
+                  h('div', { style: { display: 'flex', gap: '20px', fontSize: '0.8rem', color: '#64748b', marginBottom: '15px' } },
+                    h('span', null, 'Title length: ' + title.length + ' / 60 chars ' + (title.length > 60 ? '⚠️ (Truncated)' : '✅')),
+                    h('span', null, 'Meta description: ' + description.length + ' / 160 chars ' + (description.length > 160 ? '⚠️ (Too long)' : (description.length >= 120 ? '✅ Ideal' : 'ℹ️ (Recommended 120-160)')))
+                  )
+                ),
 
-              // 4. First 10%
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (inFirst10 ? 'checklist-pass' : 'checklist-fail') }, inFirst10 ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Focus Keyword in First 10% of Content'),
-                  h('div', { className: 'checklist-tip' }, inFirst10 ? 'Passed! Keyword introduced early.' : 'Mention your focus keyword within the very first paragraph of the article.')
-                )
-              ),
+                // SEO Factor Checklist
+                h('div', { style: { marginTop: '15px' } },
+                  h('strong', { style: { fontSize: '0.95rem', color: '#334155' } }, 'Ranking Factor Checklist:'),
 
-              // 5. Content Length
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (wordCount >= targetWords ? 'checklist-pass' : 'checklist-fail') }, wordCount >= targetWords ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Content Length (' + wordCount + ' words)'),
-                  h('div', { className: 'checklist-tip' }, wordCount >= targetWords ? ('Passed! Met target of ' + targetWords + '+ words for depth.') : ('Target is ' + targetWords + '+ words for ' + (isPillar ? 'pillar content.' : 'standard articles. Add more detail to rank.')))
-                )
-              ),
+                  // 1. Title
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: inTitle ? 'rm-pass' : 'rm-fail' }, inTitle ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Focus Keyword in SEO Title'),
+                      h('div', { className: 'rm-tip' }, inTitle ? 'Passed! Keyword appears in title.' : 'Add your exact focus keyword to the Title field.')
+                    )
+                  ),
 
-              // 6. Subheadings
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (inHeadings ? 'checklist-pass' : 'checklist-fail') }, inHeadings ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Focus Keyword in Subheadings (H2/H3)'),
-                  h('div', { className: 'checklist-tip' }, inHeadings ? 'Passed! Keyword used in headings.' : 'Use your focus keyword in at least one subheading (## Heading).')
-                )
-              ),
+                  // 2. Description
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: inDesc ? 'rm-pass' : 'rm-fail' }, inDesc ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Focus Keyword in Meta Description'),
+                      h('div', { className: 'rm-tip' }, inDesc ? 'Passed! Keyword appears in search snippet.' : 'Include your focus keyword in the SEO Meta Description.')
+                    )
+                  ),
 
-              // 7. Keyword Density
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (keywordCount > 0 ? 'checklist-pass' : 'checklist-fail') }, keywordCount > 0 ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Keyword Density (' + keywordDensity + '% - ' + keywordCount + ' times)'),
-                  h('div', { className: 'checklist-tip' }, (keywordDensity >= 0.7 && keywordDensity <= 3.0) ? 'Passed! Natural keyword frequency.' : 'Aim for 0.8% - 2.5% density without keyword stuffing.')
-                )
-              ),
+                  // 3. URL Slug
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: inSlug ? 'rm-pass' : 'rm-fail' }, inSlug ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Focus Keyword in URL Permalink'),
+                      h('div', { className: 'rm-tip' }, inSlug ? 'Passed! Keyword is in URL.' : 'Set Custom URL Permalink or include keyword in Title.')
+                    )
+                  ),
 
-              // 8. Internal & External Links
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (hasInternalLinks && hasExternalLinks ? 'checklist-pass' : 'checklist-fail') }, (hasInternalLinks && hasExternalLinks) ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Internal & External Linking'),
-                  h('div', { className: 'checklist-tip' },
-                    'Internal Links: ' + (hasInternalLinks ? '✅' : '❌ Add a link to a Marex service page') + ' | External Links: ' + (hasExternalLinks ? '✅' : '❌ Link to a reputable source')
+                  // 4. First 10%
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: inFirst10 ? 'rm-pass' : 'rm-fail' }, inFirst10 ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Focus Keyword in First 10% of Content'),
+                      h('div', { className: 'rm-tip' }, inFirst10 ? 'Passed! Keyword introduced in opening paragraph.' : 'Mention your focus keyword in the first paragraph.')
+                    )
+                  ),
+
+                  // 5. Word Count
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: wordCount >= targetWords ? 'rm-pass' : 'rm-fail' }, wordCount >= targetWords ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Content Word Count (' + wordCount + ' words)'),
+                      h('div', { className: 'rm-tip' }, wordCount >= targetWords ? ('Passed! Met target of ' + targetWords + '+ words.') : ('Target is ' + targetWords + '+ words for ' + (isPillar ? 'pillar guides.' : 'standard articles.')))
+                    )
+                  ),
+
+                  // 6. Subheadings
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: inHeadings ? 'rm-pass' : 'rm-fail' }, inHeadings ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Focus Keyword in Subheadings (H2/H3)'),
+                      h('div', { className: 'rm-tip' }, inHeadings ? 'Passed! Keyword found in headings.' : 'Use your focus keyword in at least one subheading (e.g. ## Heading).')
+                    )
+                  ),
+
+                  // 7. Density
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: keywordCount > 0 ? 'rm-pass' : 'rm-fail' }, keywordCount > 0 ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Keyword Density (' + keywordDensity + '% - used ' + keywordCount + ' times)'),
+                      h('div', { className: 'rm-tip' }, (keywordDensity >= 0.7 && keywordDensity <= 3.0) ? 'Passed! Natural density.' : 'Aim for 0.8% - 2.5% density without keyword stuffing.')
+                    )
+                  ),
+
+                  // 8. Internal & External Links
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: (hasInternalLinks && hasExternalLinks) ? 'rm-pass' : 'rm-fail' }, (hasInternalLinks && hasExternalLinks) ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Internal & External Linking'),
+                      h('div', { className: 'rm-tip' },
+                        'Internal Links: ' + (hasInternalLinks ? '✅' : '❌ Add a link to a Marex page') + ' | External Links: ' + (hasExternalLinks ? '✅' : '❌ Link to an authoritative source')
+                      )
+                    )
+                  ),
+
+                  // 9. Featured Image
+                  h('div', { className: 'rm-item' },
+                    h('span', { className: image ? 'rm-pass' : 'rm-fail' }, image ? '✔' : '✖'),
+                    h('div', null,
+                      h('strong', null, 'Featured Image / Media Attached'),
+                      h('div', { className: 'rm-tip' }, image ? 'Passed! Media attached.' : 'Upload a featured image for social previews and Google Images.')
+                    )
                   )
                 )
               ),
 
-              // 9. Featured Image
-              h('div', { className: 'checklist-item' },
-                h('span', { className: 'checklist-icon ' + (image ? 'checklist-pass' : 'checklist-fail') }, image ? '✔' : '✖'),
-                h('div', null,
-                  h('strong', null, 'Featured Image / Media Attached'),
-                  h('div', { className: 'checklist-tip' }, image ? 'Passed! Media attached.' : 'Attach a featured image for social media and Google Image discovery.')
-                )
+              // Article Preview
+              h('div', { className: 'rm-article' },
+                h('h1', { style: { fontSize: '2.4rem', color: '#0f172a', marginBottom: '1rem' } }, title),
+                imageAsset ? h('img', { src: imageAsset, style: { width: '100%', maxHeight: '400px', objectFit: 'cover', borderRadius: '12px', marginBottom: '25px' } }) : null,
+                this.props.widgetFor('body')
               )
-            )
-          ),
+            );
+          }
+        });
 
-          // Render Normal Article Preview below the SEO panel
-          h('div', { style: { marginTop: '40px', borderTop: '2px solid #e2e8f0', paddingTop: '30px' } },
-            h('h1', { style: { fontSize: '2.4rem', color: '#0f172a', marginBottom: '1rem' } }, title),
-            image ? h('img', { src: props.getAsset(image), style: { width: '100%', height: '350px', objectFit: 'cover', borderRadius: '12px', marginBottom: '25px' } }) : null,
-            h('div', { className: 'article-preview-body' }, props.widgetFor('body'))
-          )
-        );
-      };
-
-      // Register with Decap CMS
-      CMS.registerPreviewTemplate('blog', BlogSEOPreview);
+        CMS.registerPreviewTemplate('blog', BlogSEOPreview);
+      })();
     </script>
   </body>
 </html>
