@@ -6,6 +6,8 @@ image: /assets/images/business-growth-stress.png
 description: Is your business growing but becoming more stressful to manage?
   Learn why business growth stress happens and how systems can help you scale
   without chaos.
+focus_keyword: " Business Is Growing but Your Stress Is Also Growing"
+permalink: /business-is-growing-but-your-stress-is-also-growing
 ---
 Growing a business is supposed to feel rewarding. More customers, more sales, and more opportunities should be signs that you're moving in the right direction.
 
