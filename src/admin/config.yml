@@ -12,8 +12,9 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
+      - {label: "Save as Draft", name: "draft", widget: "boolean", default: false, hint: "Turn ON to keep as a draft (hidden from the live website). Turn OFF when ready to publish."}
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Publish Date (Scheduling)", name: "date", widget: "datetime", hint: "Set to a future date to schedule. Future posts remain hidden until that date."}
       - {label: "Featured Image", name: "image", widget: "image", required: false}
       - {label: "SEO Meta Description", name: "description", widget: "string", hint: "Search snippet preview (150-160 characters recommended)"}
       - {label: "Focus Keyword (Rank Math SEO)", name: "focus_keyword", widget: "string", required: false, hint: "Primary keyword to optimize this post for"}
