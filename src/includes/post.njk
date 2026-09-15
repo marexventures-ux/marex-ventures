@@ -1,6 +1,76 @@
 ---
 layout: base.njk
 ---
+<style>
+  .toc-container {
+    display: none;
+    background: var(--surface-color);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+  }
+  .toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .toc-title {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--accent-navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toc-toggle-btn {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .toc-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .toc-list ul li a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .toc-list ul li a:hover {
+    color: var(--accent-red);
+    transform: translateX(4px);
+  }
+
+  /* Dark Theme Contrast Enhancement */
+  [data-theme="dark"] .toc-container {
+    background: #112542 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  [data-theme="dark"] .toc-title {
+    color: #FFFFFF !important;
+  }
+  [data-theme="dark"] .toc-toggle-btn {
+    color: #94A3B8 !important;
+  }
+  [data-theme="dark"] .toc-list ul li a {
+    color: #E2E8F0 !important;
+  }
+  [data-theme="dark"] .toc-list ul li a:hover {
+    color: #FF5A5F !important;
+  }
+</style>
+
 <section class="container section" style="padding-top: 150px; max-width: 800px; margin: 0 auto;">
   <div class="floating-card" style="padding: 4rem; margin-bottom: 2rem;">
     <a href="/blog/" style="display: inline-block; margin-bottom: 2rem; color: var(--accent-red); text-decoration: none; font-weight: 600;">&larr; Back to Blog</a>
@@ -11,15 +81,15 @@ layout: base.njk
     {% endif %}
 
     <!-- Auto-Generated Table of Contents Container -->
-    <div id="toc-container" style="display: none; background: rgba(248, 250, 252, 0.85); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleTOC()">
-        <h3 style="margin: 0; font-size: 1.15rem; color: var(--accent-navy); display: flex; align-items: center; gap: 8px;">
+    <div id="toc-container" class="toc-container">
+      <div class="toc-header" onclick="toggleTOC()">
+        <h3 class="toc-title">
           <span>📑</span> Table of Contents
         </h3>
-        <span id="toc-toggle-icon" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">[Hide]</span>
+        <span id="toc-toggle-icon" class="toc-toggle-btn">[Hide]</span>
       </div>
-      <nav id="toc-list" style="margin-top: 1rem;">
-        <ul style="list-style: none; padding-left: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem;"></ul>
+      <nav id="toc-list" class="toc-list">
+        <ul></ul>
       </nav>
     </div>
 
@@ -56,11 +126,6 @@ layout: base.njk
       var a = document.createElement("a");
       a.href = "#" + heading.id;
       a.textContent = heading.textContent;
-      a.style.color = "var(--text-main)";
-      a.style.textDecoration = "none";
-      a.style.transition = "color 0.2s";
-      a.onmouseover = function() { this.style.color = "var(--accent-red)"; };
-      a.onmouseout = function() { this.style.color = "var(--text-main)"; };
 
       li.appendChild(a);
       tocList.appendChild(li);
@@ -70,10 +135,10 @@ layout: base.njk
   });
 
   function toggleTOC() {
-    var list = document.getElementById("toc-list");
+    var list = document.querySelector("#toc-list ul");
     var icon = document.getElementById("toc-toggle-icon");
     if (list.style.display === "none") {
-      list.style.display = "block";
+      list.style.display = "flex";
       icon.textContent = "[Hide]";
     } else {
       list.style.display = "none";

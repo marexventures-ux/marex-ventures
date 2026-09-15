@@ -6,16 +6,15 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/_redirects");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
+  eleventyConfig.addPassthroughCopy("src/favicon.png");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
   
-  // Custom collection for blog posts: excludes drafts & future scheduled posts
+  // Custom collection for blog posts: only excludes drafts if explicitly marked as draft
   eleventyConfig.addCollection("blog", function(collectionApi) {
-    const now = new Date();
     return collectionApi.getFilteredByTag("blog")
       .filter(item => {
         // Exclude drafts
         if (item.data.draft === true) return false;
-        // Exclude future scheduled posts
-        if (item.date && item.date > now) return false;
         return true;
       })
       .sort((a, b) => b.date - a.date);
