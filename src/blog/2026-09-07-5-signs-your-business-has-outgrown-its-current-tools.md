@@ -8,6 +8,8 @@ focus_keyword: signs your business needs automation
 secondary_keywords: business automation, automate business processes, business
   process automation, manual business processes, workflow automation
 is_pillar: false
+category: Business Automation
+post_tags: Business Automation, Workflow, Tools, CRM
 permalink: /signs-your-business-needs-automation/
 ---
 Your business doesn't have to be huge before your tools start holding you back.

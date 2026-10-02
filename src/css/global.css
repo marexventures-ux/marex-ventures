@@ -423,6 +423,101 @@ footer {
   color: var(--text-muted);
   opacity: 0.5;
 }
+.press-link {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  text-decoration: none;
+  opacity: 0.85;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  background: var(--surface-color);
+  border: 1px solid var(--glass-border);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.press-link:hover {
+  opacity: 1;
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(229, 37, 40, 0.15);
+}
+[data-theme="dark"] .press-link {
+  background: #112542;
+  color: #E2E8F0;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+[data-theme="dark"] .press-link:hover {
+  color: #FF5A5F;
+  border-color: #FF5A5F;
+}
+
+/* Category Filters & Tags for Blog */
+.category-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+.category-btn {
+  background: var(--surface-color);
+  color: var(--text-muted);
+  border: 1px solid var(--glass-border);
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.category-btn:hover {
+  color: var(--text-main);
+  border-color: var(--accent-navy);
+  transform: translateY(-1px);
+}
+.category-btn.active {
+  background: var(--accent-red);
+  color: #FFFFFF;
+  border-color: var(--accent-red);
+  box-shadow: 0 4px 14px rgba(229, 37, 40, 0.25);
+}
+[data-theme="dark"] .category-btn {
+  background: #112542;
+  color: #94A3B8;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .category-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+[data-theme="dark"] .category-btn.active {
+  background: #E52528;
+  color: #FFFFFF;
+  border-color: #E52528;
+}
+.blog-post-card[data-hidden="true"] {
+  display: none !important;
+}
+.post-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+.post-tag {
+  background: var(--surface-hover);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border);
+}
 .philosophy-banner {
   background: linear-gradient(135deg, #0B1B32 0%, #1a2a44 100%);
   border-radius: 24px;

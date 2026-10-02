@@ -7,6 +7,8 @@ description: Manual work costs more than employee time. Discover the hidden cost
   tools.
 focus_keyword: hidden cost of manual processes
 is_pillar: false
+category: Business Automation
+post_tags: Manual Processes, Spreadsheets, Efficiency, Automation
 permalink: /hidden-cost-of-manual-processes/
 ---
 Spreadsheets are useful.

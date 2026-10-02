@@ -16,6 +16,8 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date (Scheduling)", name: "date", widget: "datetime", hint: "Set to a future date to schedule. Future posts remain hidden until that date."}
       - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Category", name: "category", widget: "select", options: ["Business Automation", "Systems & Operations", "Custom Software", "AI & Digital Tools", "SME Growth & Strategy", "Case Studies"], default: "Business Automation", required: false, hint: "Select the primary category for this article"}
+      - {label: "Tags", name: "post_tags", widget: "string", required: false, hint: "Comma-separated tags (e.g. Automation, Zapier, Operations, Workflows)"}
       - {label: "SEO Meta Description", name: "description", widget: "string", hint: "Search snippet preview (150-160 characters recommended)"}
       - {label: "Focus Keyword (Rank Math SEO)", name: "focus_keyword", widget: "string", required: false, hint: "Primary keyword to optimize this post for"}
       - {label: "Secondary Keywords", name: "secondary_keywords", widget: "string", required: false, hint: "Comma-separated secondary keywords"}
