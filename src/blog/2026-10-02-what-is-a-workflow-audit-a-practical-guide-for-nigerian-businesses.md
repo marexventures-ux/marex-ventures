@@ -1,8 +1,10 @@
 ---
-draft: false
+draft: true
 title: What Is a Workflow Audit? A Practical Guide for Nigerian Businesses
 date: 2026-10-02T12:56:00.000+01:00
 image: /assets/images/workflow-audit-nigeria.png
+category: Systems & Operations
+post_tags: ""
 description: What is a workflow audit, and does your business need one? Learn
   how a workflow audit helps Nigerian businesses find bottlenecks, reduce manual
   work, and plan better systems.
