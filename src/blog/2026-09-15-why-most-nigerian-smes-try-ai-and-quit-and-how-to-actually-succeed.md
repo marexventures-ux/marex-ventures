@@ -1,7 +1,10 @@
 ---
+draft: true
 title: Why Most Nigerian SMEs Try AI and Quit (and How to Actually Succeed)
 date: 2026-09-15T17:03:00.000+01:00
 image: /assets/images/ai-adoption-barriers-nigerian-smes.png
+category: AI & Digital Tools
+post_tags: ""
 description: Why do Nigerian SMEs struggle to adopt AI? Explore the biggest AI
   adoption barriers in Nigeria and how businesses can overcome them with a
   practical approach.
