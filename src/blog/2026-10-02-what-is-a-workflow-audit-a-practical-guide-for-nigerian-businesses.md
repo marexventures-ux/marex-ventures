@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: What Is a Workflow Audit? A Practical Guide for Nigerian Businesses
 date: 2026-10-02T12:56:00.000+01:00
 image: /assets/images/workflow-audit-nigeria.png
