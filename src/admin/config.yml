@@ -20,5 +20,5 @@ collections:
       - {label: "Focus Keyword (Rank Math SEO)", name: "focus_keyword", widget: "string", required: false, hint: "Primary keyword to optimize this post for"}
       - {label: "Secondary Keywords", name: "secondary_keywords", widget: "string", required: false, hint: "Comma-separated secondary keywords"}
       - {label: "Pillar Content", name: "is_pillar", widget: "boolean", default: false, required: false, hint: "Check if this is a comprehensive pillar/cornerstone guide"}
-      - {label: "Custom URL Permalink", name: "permalink", widget: "string", required: false, hint: "Optional: Define custom URL path, e.g. /blog/business-growth-stress/ (Leave empty for default date URL)"}
+      - {label: "Custom URL Permalink", name: "permalink", widget: "string", required: false, hint: "Optional: Define custom URL path, e.g. /blog/business-growth-stress/ (Always end with a trailing slash /)"}
       - {label: "Body", name: "body", widget: "markdown"}

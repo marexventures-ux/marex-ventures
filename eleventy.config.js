@@ -1,4 +1,23 @@
 module.exports = function(eleventyConfig) {
+  // Allow missing extensions globally in Eleventy v3
+  eleventyConfig.configureErrorReporting({ allowMissingExtensions: true });
+  eleventyConfig.addGlobalData("eleventyAllowMissingExtension", true);
+
+  // Auto-normalize permalinks: ensures paths without extensions end with a trailing slash
+  eleventyConfig.addGlobalData("eleventyComputed", {
+    permalink: (data) => {
+      if (!data.permalink) {
+        return undefined;
+      }
+      let p = String(data.permalink).trim();
+      if (!p) return undefined;
+      if (p.endsWith('/') || /\.[a-zA-Z0-9]+$/.test(p)) {
+        return p;
+      }
+      return `${p}/`;
+    }
+  });
+
   // Passthrough copy for static assets
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
