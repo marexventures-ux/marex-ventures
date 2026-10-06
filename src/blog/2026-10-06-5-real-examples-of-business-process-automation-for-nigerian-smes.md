@@ -2,6 +2,7 @@
 draft: true
 title: 5 Real Examples of Business Process Automation for Nigerian SMEs
 date: 2026-10-06T14:25:00.000+01:00
+image: /assets/images/business-process-automation-examples-nigerian-smes.png
 category: Case Studies
 description: See 5 real business process automation examples for Nigerian SMEs,
   from tax tracking and sales management to lead follow-up and stipend payments.
@@ -40,6 +41,8 @@ The goal is simple: **let the system handle the repeatable parts so people can f
 Here are five real examples from Marex Ventures.
 
 ## 1. TaxFlow Revenue Manager: Managing a Large Taxpayer Workflow
+
+![TaxFlow Revenue Manager dashboard showing taxpayer records, revenue collected and outstanding liabilities](/assets/images/taxflow-revenue-manager-dashboard-nigeria.png.png "TaxFlow Revenue Manager dashboard for tracking taxpayer and revenue information.")
 
 One of the clearest examples is a revenue management system built to handle taxpayer records and revenue administration.
 
@@ -241,6 +244,8 @@ Each stage has somewhere to go next.
 That reduces the amount of information that gets lost between stages and gives the business a clearer view of what is happening.
 
 ## 4. Marex Sellers: Helping Online Sellers Track the Money
+
+![Marex Sellers dashboard showing sales, profit, expenses and revenue analysis for online sellers](/assets/images/marex-sellers-sales-profit-dashboard.png.jpeg "Marex Sellers gives online vendors a central view of sales, expenses, profit and business performance.")
 
 Many online sellers start by selling through WhatsApp, Instagram or other social platforms.
 
@@ -481,3 +486,25 @@ Not having more technology.
 **Having a business that runs better because the right work is handled by the right system.**
 
 If you're not sure which part of your business should be automated first, start by mapping the workflow before choosing the tool.
+
+## FAQ
+
+### What is business process automation?
+
+Business process automation uses software, defined rules and connected systems to handle repeatable business tasks with less manual work.
+
+### What are examples of business process automation?
+
+Examples include automated lead tracking, attendance-based payment calculations, invoice tracking, sales record management, customer onboarding and document generation.
+
+### Is business process automation useful for Nigerian SMEs?
+
+Yes. Nigerian SMEs can automate repetitive processes such as lead management, sales tracking, reporting, customer onboarding, attendance calculations and other workflows that consume significant manual time.
+
+### How do I know what to automate in my business?
+
+Start with a repeatable process that takes significant time, follows clear rules or is prone to manual errors. Map the workflow before choosing an automation tool or custom system.
+
+### Do small businesses need custom software for automation?
+
+Not always. Some processes can be automated by connecting existing tools. Others need a custom internal tool when the workflow is specific to the business or existing software cannot handle the required process.
