@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: 5 Real Examples of Business Process Automation for Nigerian SMEs
 date: 2026-10-06T14:25:00.000+01:00
 image: /assets/images/business-process-automation-examples-nigerian-smes.png
