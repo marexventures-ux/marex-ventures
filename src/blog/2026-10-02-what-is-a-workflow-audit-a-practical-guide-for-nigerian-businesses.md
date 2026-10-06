@@ -9,7 +9,7 @@ description: What is a workflow audit, and does your business need one? Learn
   how a workflow audit helps Nigerian businesses find bottlenecks, reduce manual
   work, and plan better systems.
 focus_keyword: workflow audit Nigeria
-is_pillar: false
+is_pillar: true
 permalink: /workflow-audit-nigeria/
 ---
 Your business may not need more software.
