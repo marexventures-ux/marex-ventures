@@ -7,8 +7,13 @@
 /revenue-clarity-report-nigeria/ /audit.html 301
 /ai-seo-auditor/ /custom-tools.html 301
 /ai-powered-facebook-ads-strategist/ /services.html 301
-/solo-african-ai-innovator/ /founder.html 301
+/solo-african-ai-innovator/ /mary-mmoh/ 301
+/solo-african-ai-innovator /mary-mmoh/ 301
+/founder/ /mary-mmoh/ 301
+/founder.html /mary-mmoh/ 301
+/founder /mary-mmoh/ 301
 # Example: /category/services /services.html 301
 
 /products.html /services.html 301
 /products /services 301
+/training.html /training/ 301
