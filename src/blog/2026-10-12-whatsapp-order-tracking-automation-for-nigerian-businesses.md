@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: WhatsApp Order Tracking Automation for Nigerian Businesses
 date: 2026-10-12T14:34:00.000+01:00
 image: /assets/images/whatsapp-order-tracking-automation-nigeria.png
