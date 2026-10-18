@@ -39,6 +39,16 @@ module.exports = function(eleventyConfig) {
       .sort((a, b) => b.date - a.date);
   });
 
+  // Custom filter for related blog posts:
+  // Excludes current post, prioritizes posts in the same category, and returns up to limit (default 2)
+  eleventyConfig.addFilter("getRelatedPosts", function(posts, currentUrl, currentCategory, limit = 2) {
+    if (!posts || !Array.isArray(posts)) return [];
+    const others = posts.filter(item => item.url && item.url !== currentUrl);
+    const sameCat = others.filter(item => item.data && item.data.category && item.data.category === currentCategory);
+    const diffCat = others.filter(item => !item.data || !item.data.category || item.data.category !== currentCategory);
+    return [...sameCat, ...diffCat].slice(0, limit || 2);
+  });
+
   return {
     dir: {
       input: "src",

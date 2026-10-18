@@ -65,27 +65,172 @@ eleventyExcludeFromCollections: true
     </div>
   </div>
 
+  <!-- Pagination Controls (Displays 6 posts per page) -->
+  <div id="blog-pagination" class="pagination-wrapper" style="display: none;">
+    <button id="pagination-prev" class="pagination-btn pagination-nav-btn" onclick="changePage(currentPage - 1)" aria-label="Previous Page">
+      &larr; Previous
+    </button>
+    <div id="pagination-numbers" style="display: flex; gap: 0.5rem; align-items: center;"></div>
+    <button id="pagination-next" class="pagination-btn pagination-nav-btn" onclick="changePage(currentPage + 1)" aria-label="Next Page">
+      Next &rarr;
+    </button>
+  </div>
+
+  <style>
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .pagination-btn {
+      min-width: 42px;
+      height: 42px;
+      padding: 0 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: var(--surface-color);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .pagination-btn:hover:not(:disabled):not(.active) {
+      border-color: var(--accent-red);
+      color: var(--accent-red);
+      transform: translateY(-1px);
+    }
+    .pagination-btn.active {
+      background: var(--accent-red);
+      color: #ffffff;
+      border-color: var(--accent-red);
+      box-shadow: 0 4px 12px rgba(229, 37, 40, 0.28);
+    }
+    .pagination-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .pagination-nav-btn {
+      padding: 0 1.25rem;
+    }
+    [data-theme="dark"] .pagination-btn {
+      background: #112542;
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #E2E8F0;
+    }
+    [data-theme="dark"] .pagination-btn.active {
+      background: var(--accent-red);
+      color: #ffffff;
+      border-color: var(--accent-red);
+    }
+    [data-theme="dark"] .pagination-btn:hover:not(:disabled):not(.active) {
+      border-color: var(--accent-red);
+      color: #ffffff;
+    }
+  </style>
+
   <script>
+    const POSTS_PER_PAGE = 6;
+    let currentPage = 1;
+    let currentCategory = 'all';
+
     function filterCategory(btn, category) {
       document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const cards = document.querySelectorAll('.blog-post-card');
-      let visibleCount = 0;
-      cards.forEach(card => {
+      currentCategory = category;
+      currentPage = 1;
+      renderBlogView(false);
+    }
+
+    function changePage(newPage) {
+      currentPage = newPage;
+      renderBlogView(true);
+    }
+
+    function renderBlogView(shouldScroll) {
+      const allCards = Array.from(document.querySelectorAll('.blog-post-card'));
+      if (!allCards.length) return;
+
+      // Filter cards by category
+      const matchingCards = allCards.filter(card => {
         const cardCat = card.getAttribute('data-category');
-        if (category === 'all' || cardCat === category) {
-          card.removeAttribute('data-hidden');
-          card.style.display = 'flex';
-          visibleCount++;
-        } else {
-          card.setAttribute('data-hidden', 'true');
-          card.style.display = 'none';
-        }
+        return (currentCategory === 'all' || cardCat === currentCategory);
       });
+
+      const totalMatching = matchingCards.length;
+      const totalPages = Math.ceil(totalMatching / POSTS_PER_PAGE) || 1;
+
+      // Clamp current page
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      // Hide all cards first
+      allCards.forEach(c => {
+        c.style.display = 'none';
+        c.setAttribute('data-hidden', 'true');
+      });
+
+      // Show exactly the 6 cards for the active page
+      const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+      const endIndex = startIndex + POSTS_PER_PAGE;
+      const pageCards = matchingCards.slice(startIndex, endIndex);
+
+      pageCards.forEach(c => {
+        c.style.display = 'flex';
+        c.removeAttribute('data-hidden');
+      });
+
+      // No posts message
       const noPostsMsg = document.getElementById('no-posts-msg');
       if (noPostsMsg) {
-        noPostsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        noPostsMsg.style.display = totalMatching === 0 ? 'block' : 'none';
+      }
+
+      // Render pagination
+      const paginationWrapper = document.getElementById('blog-pagination');
+      const numbersContainer = document.getElementById('pagination-numbers');
+      const prevBtn = document.getElementById('pagination-prev');
+      const nextBtn = document.getElementById('pagination-next');
+
+      if (totalPages > 1) {
+        paginationWrapper.style.display = 'flex';
+        prevBtn.disabled = (currentPage === 1);
+        nextBtn.disabled = (currentPage === totalPages);
+
+        numbersContainer.innerHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+          const numBtn = document.createElement('button');
+          numBtn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
+          numBtn.textContent = i;
+          numBtn.setAttribute('aria-label', 'Go to page ' + i);
+          numBtn.onclick = function() { changePage(i); };
+          numbersContainer.appendChild(numBtn);
+        }
+      } else {
+        paginationWrapper.style.display = 'none';
+      }
+
+      // Smooth scroll to top of blog grid if page changed
+      if (shouldScroll) {
+        const gridElem = document.getElementById('blog-grid');
+        if (gridElem) {
+          const offset = gridElem.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
       }
     }
+
+    // Initialize pagination on DOM ready
+    document.addEventListener('DOMContentLoaded', function() {
+      renderBlogView(false);
+    });
   </script>
 </section>

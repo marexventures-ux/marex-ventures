@@ -69,6 +69,73 @@ layout: base.njk
   [data-theme="dark"] .toc-list ul li a:hover {
     color: #FF5A5F !important;
   }
+
+  /* Social Share Bar */
+  .share-article-wrapper {
+    margin-top: 3rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--surface-hover);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .share-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent-navy);
+  }
+  .share-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    background: var(--surface-color);
+    color: var(--text-main);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .share-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+  .share-x:hover { border-color: #000; color: #000; }
+  .share-linkedin:hover { border-color: #0A66C2; color: #0A66C2; }
+  .share-whatsapp:hover { border-color: #25D366; color: #25D366; }
+  .share-facebook:hover { border-color: #1877F2; color: #1877F2; }
+
+  [data-theme="dark"] .share-article-wrapper {
+    background: #0f213b;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  [data-theme="dark"] .share-label {
+    color: #FFFFFF;
+  }
+  [data-theme="dark"] .share-btn {
+    background: #112542;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #E2E8F0;
+  }
+  [data-theme="dark"] .share-x:hover { border-color: #fff; color: #fff; }
+  [data-theme="dark"] .share-linkedin:hover { border-color: #38bdf8; color: #38bdf8; }
+  [data-theme="dark"] .share-whatsapp:hover { border-color: #4ade80; color: #4ade80; }
+  [data-theme="dark"] .share-facebook:hover { border-color: #60a5fa; color: #60a5fa; }
 </style>
 
 <section class="container section" style="padding-top: 150px; max-width: 800px; margin: 0 auto;">
@@ -102,14 +169,92 @@ layout: base.njk
       {{ content | safe }}
     </div>
 
+    <!-- Social Media Share Bar -->
+    <div class="share-article-wrapper">
+      <span class="share-label">Share this article:</span>
+      <div class="share-buttons-group">
+        <!-- X / Twitter -->
+        <a href="https://twitter.com/intent/tweet?text={{ title | urlencode }}&url=https://marexventures.com{{ page.url }}" 
+           target="_blank" rel="noopener noreferrer" class="share-btn share-x" aria-label="Share on X (Twitter)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span>Post</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://marexventures.com{{ page.url }}" 
+           target="_blank" rel="noopener noreferrer" class="share-btn share-linkedin" aria-label="Share on LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          <span>Share</span>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://api.whatsapp.com/send?text={{ title | urlencode }}%20https://marexventures.com{{ page.url }}" 
+           target="_blank" rel="noopener noreferrer" class="share-btn share-whatsapp" aria-label="Share on WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://marexventures.com{{ page.url }}" 
+           target="_blank" rel="noopener noreferrer" class="share-btn share-facebook" aria-label="Share on Facebook">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z"/></svg>
+          <span>Facebook</span>
+        </a>
+
+        <!-- Copy Link Button -->
+        <button id="copy-share-btn" class="share-btn share-copy" onclick="copyArticleLink()" aria-label="Copy article link">
+          <svg id="copy-share-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          <span id="copy-btn-text">Copy Link</span>
+        </button>
+      </div>
+    </div>
+
     {% if post_tags %}
-    <div style="margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
       <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 0.75rem;">Article Tags</h4>
       <div class="post-tags-container">
         {% for tag in post_tags.split(',') %}
           {% if tag | trim %}
           <span class="post-tag">#{{ tag | trim }}</span>
           {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Related Articles Section -->
+    {% set relatedPosts = collections.blog | getRelatedPosts(page.url, category, 2) %}
+    {% if relatedPosts and relatedPosts.length > 0 %}
+    <div class="related-posts-section" style="margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--glass-border);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <span class="badge-tag" style="margin-bottom: 0.4rem; font-size: 0.75rem;">Keep Reading</span>
+          <h3 style="font-size: 1.4rem; color: var(--accent-navy); margin: 0;">Related Articles</h3>
+        </div>
+        <a href="/blog/" style="color: var(--accent-red); font-weight: 600; text-decoration: none; font-size: 0.95rem;">All Articles &rarr;</a>
+      </div>
+      <div class="grid grid-cols-2" style="gap: 1.5rem;">
+        {% for relPost in relatedPosts %}
+        {% set relCat = relPost.data.category | default("Business Automation") %}
+        <div class="floating-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; border-top: 3px solid var(--accent-red); background: var(--surface-color);">
+          {% if relPost.data.image %}
+          <img src="{{ relPost.data.image }}" alt="{{ relPost.data.title }}" style="width: 100%; height: 160px; object-fit: cover;">
+          {% endif %}
+          <div style="padding: 1.5rem; display: flex; flex-direction: column; flex: 1;">
+            <div style="margin-bottom: 0.5rem;">
+              <span class="badge-tag" style="font-size: 0.75rem; padding: 0.2rem 0.6rem;">{{ relCat }}</span>
+            </div>
+            <h4 style="font-size: 1.1rem; line-height: 1.4; margin-bottom: 0.75rem;">
+              <a href="{{ relPost.url }}" style="color: var(--accent-navy); text-decoration: none;">{{ relPost.data.title }}</a>
+            </h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem; flex: 1;">
+              {{ relPost.data.description | truncate(95) if relPost.data.description else "" }}
+            </p>
+            <div style="margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--glass-border);">
+              <a href="{{ relPost.url }}" style="color: var(--accent-red); font-weight: bold; font-size: 0.9rem; text-decoration: none;">Read Article &rarr;</a>
+            </div>
+          </div>
+        </div>
         {% endfor %}
       </div>
     </div>
@@ -161,6 +306,45 @@ layout: base.njk
     } else {
       list.style.display = "none";
       icon.textContent = "[Show]";
+    }
+  }
+
+  function copyArticleLink() {
+    var url = window.location.href;
+    var copyText = document.getElementById("copy-btn-text");
+    var copyBtn = document.getElementById("copy-share-btn");
+
+    function showCopied() {
+      if (copyText) copyText.textContent = "Copied!";
+      if (copyBtn) {
+        copyBtn.style.borderColor = "var(--accent-red)";
+        copyBtn.style.color = "var(--accent-red)";
+      }
+      setTimeout(function() {
+        if (copyText) copyText.textContent = "Copy Link";
+        if (copyBtn) {
+          copyBtn.style.borderColor = "";
+          copyBtn.style.color = "";
+        }
+      }, 2500);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(showCopied).catch(function() {
+        fallbackCopy(url);
+      });
+    } else {
+      fallbackCopy(url);
+    }
+
+    function fallbackCopy(text) {
+      var temp = document.createElement("input");
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+      showCopied();
     }
   }
 </script>

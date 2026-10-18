@@ -9,11 +9,13 @@
 /ai-powered-facebook-ads-strategist/ /services.html 301
 /solo-african-ai-innovator/ /mary-mmoh/ 301
 /solo-african-ai-innovator /mary-mmoh/ 301
-/founder/ /mary-mmoh/ 301
-/founder.html /mary-mmoh/ 301
-/founder /mary-mmoh/ 301
+/founder/ /mary-mmoh/ 301!
+/founder.html /mary-mmoh/ 301!
+/founder /mary-mmoh/ 301!
 # Example: /category/services /services.html 301
 
 /products.html /services.html 301
 /products /services 301
-/training.html /training/ 301
+/training.html /training/ 301!
+/go /training/ai-without-code/ 302
+/go/ /training/ai-without-code/ 302
