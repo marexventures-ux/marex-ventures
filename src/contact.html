@@ -11,46 +11,167 @@ description: ""
         Fill out the form below to book a consultation. Our team will review your current systems and design a custom software or automation strategy tailored to your exact workflows.
       </p>
       
-      <form name="consultation" method="POST" data-netlify="true" action="/index.html">
+      <form id="consultation-form" novalidate>
+        <!-- Honeypot spam trap (hidden with CSS, must stay empty) -->
+        <div style="display: none !important; position: absolute; left: -9999px;" aria-hidden="true">
+          <label>Don’t fill this out: <input type="text" name="spam_trap" tabindex="-1" autocomplete="off" value=""></label>
+        </div>
+
+        <!-- Hidden Context Fields -->
+        <input type="hidden" name="form_type" value="general">
+        <input type="hidden" name="page_url" value="">
+        <input type="hidden" name="utm_source" value="">
+        <input type="hidden" name="utm_medium" value="">
+        <input type="hidden" name="utm_campaign" value="">
+
         <div class="form-group">
-          <label>Name</label>
+          <label>Name *</label>
           <input type="text" name="name" class="form-control" required placeholder="John Doe">
         </div>
-        
+
         <div class="form-group">
-          <label>Business Type</label>
-          <input type="text" name="business_type" class="form-control" required placeholder="e.g., Marketing Agency, E-Commerce, SaaS">
+          <label>Work Email *</label>
+          <input type="email" name="email" class="form-control" required placeholder="name@company.com">
+        </div>
+
+        <div class="form-group">
+          <label>Phone / WhatsApp Number</label>
+          <input type="tel" name="phone" class="form-control" placeholder="+234 800 000 0000">
         </div>
         
         <div class="form-group">
           <label>Service of Interest</label>
-          <select name="service_interest" class="form-control" required>
+          <select name="service" class="form-control">
             <option value="">Select a service...</option>
-            <option value="automation">Automation Systems</option>
-            <option value="custom_tools">Custom Tools</option>
-            <option value="training">Trainings & Workshops</option>
-            <option value="other">Not Sure / Other</option>
+            <option value="Automation Systems">Automation Systems</option>
+            <option value="Custom Tools">Custom Tools</option>
+            <option value="Trainings & Workshops">Trainings & Workshops</option>
+            <option value="AI Without Code">AI Without Code Program</option>
+            <option value="Not Sure / Other">Not Sure / Other</option>
           </select>
         </div>
         
         <div class="form-group">
-          <label>Project Details (Optional)</label>
-          <textarea name="project_details" class="form-control" rows="5" placeholder="Describe your project, workflows, or what you're looking to achieve..."></textarea>
+          <label>Project Details / Message</label>
+          <textarea name="message" class="form-control" rows="5" placeholder="Describe your project, workflows, or what you're looking to achieve..."></textarea>
         </div>
-        
-        <div class="form-group">
-          <label>Budget (Optional)</label>
-          <select name="budget" class="form-control">
-            <option value="">Select your budget range...</option>
-            <option value="under_1m">Under ₦1,000,000</option>
-            <option value="1m_to_5m">₦1,000,000 - ₦5,000,000</option>
-            <option value="5m_to_10m">₦5,000,000 - ₦10,000,000</option>
-            <option value="10m_plus">₦10,000,000+</option>
-          </select>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label style="display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: var(--text-main); cursor: pointer; font-weight: normal;">
+            <input type="checkbox" name="consent_updates" style="margin-top: 0.2rem; width: 18px; height: 18px; accent-color: var(--accent-red); cursor: pointer;">
+            <span style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">I would like to receive occasional insights, automation playbooks, and updates from Marex Ventures.</span>
+          </label>
         </div>
+
+        <!-- Error Message Container -->
+        <div id="general-form-error" style="display: none; padding: 1rem 1.25rem; border-radius: 8px; background: rgba(229, 37, 40, 0.1); border: 1px solid var(--accent-red); color: var(--accent-red); font-size: 0.95rem; font-weight: 600; text-align: center; margin-top: 1rem;"></div>
         
-        <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 8px; font-size: 1.1rem; padding: 1rem; margin-top: 1.5rem;">Book Consultation</button>
+        <button type="submit" id="general-submit-btn" class="btn btn-primary" style="width: 100%; border-radius: 8px; font-size: 1.1rem; padding: 1rem; margin-top: 1.5rem; cursor: pointer;">Book Consultation</button>
       </form>
+
+      <script>
+        // Webhook configuration (configured in one setting at top of code)
+        const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/3r6hgtonqoq6bq4ppb3vdpc33m7bu38e';
+
+        document.addEventListener('DOMContentLoaded', function() {
+          const form = document.getElementById('consultation-form');
+          if (!form) return;
+
+          const errorDiv = document.getElementById('general-form-error');
+          const submitBtn = document.getElementById('general-submit-btn');
+
+          form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (errorDiv) errorDiv.style.display = 'none';
+
+            // Honeypot spam trap check
+            const spamTrap = form.spam_trap ? form.spam_trap.value.trim() : '';
+            if (spamTrap !== '') {
+              // Silently redirect bot submissions without hitting webhook
+              window.location.href = '/thank-you/';
+              return;
+            }
+
+            // Extract & Validate Fields
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!name) {
+              showError('Please enter your full name.');
+              form.name.focus();
+              return;
+            }
+
+            if (!email || !emailRegex.test(email)) {
+              showError('Please enter a valid work email address.');
+              form.email.focus();
+              return;
+            }
+
+            const phone = form.phone ? form.phone.value.trim() : '';
+            const service = form.service ? form.service.value : '';
+            const message = form.message ? form.message.value.trim() : '';
+
+            // Consent updates checkbox (sends "yes" or "no")
+            const consentChecked = form.consent_updates ? form.consent_updates.checked : false;
+            const consentUpdates = consentChecked ? 'yes' : 'no';
+
+            // UTM parameters from URL / preserved storage
+            const utmSource = window.getMarexUtm ? window.getMarexUtm('utm_source') : '';
+            const utmMedium = window.getMarexUtm ? window.getMarexUtm('utm_medium') : '';
+            const utmCampaign = window.getMarexUtm ? window.getMarexUtm('utm_campaign') : '';
+
+            const payload = {
+              form_type: 'general',
+              name: name,
+              email: email,
+              phone: phone,
+              service: service,
+              message: message,
+              consent_updates: consentUpdates,
+              spam_trap: '',
+              page_url: window.location.href,
+              utm_source: utmSource,
+              utm_medium: utmMedium,
+              utm_campaign: utmCampaign
+            };
+
+            submitBtn.disabled = true;
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Submitting...';
+
+            try {
+              const response = await fetch(MAKE_WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+              });
+
+              if (response.ok || (response.status >= 200 && response.status < 300)) {
+                window.location.href = '/thank-you/';
+              } else {
+                throw new Error('Webhook responded with status ' + response.status);
+              }
+            } catch (err) {
+              showError('Something went wrong. Please email us at <a href="mailto:hello@marexventures.com" style="color: inherit; text-decoration: underline;">hello@marexventures.com</a>');
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnText;
+            }
+          });
+
+          function showError(msg) {
+            if (errorDiv) {
+              errorDiv.innerHTML = msg;
+              errorDiv.style.display = 'block';
+            } else {
+              alert(msg);
+            }
+          }
+        });
+      </script>
       
       <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--glass-border); text-align: center;">
         <h3 style="font-size: 1.2rem; color: var(--accent-navy); margin-bottom: 1rem;">Connect With Us</h3>

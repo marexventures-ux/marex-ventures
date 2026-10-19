@@ -114,3 +114,32 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => counterObserver.observe(counter));
   }
 });
+
+// Preserve UTM parameters across site navigation
+(function() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign'].forEach(param => {
+      const val = params.get(param);
+      if (val) {
+        sessionStorage.setItem('marex_' + param, val);
+      }
+    });
+  } catch (e) {
+    // Session storage fallback
+  }
+})();
+
+window.getMarexUtm = function(param) {
+  try {
+    const urlVal = new URLSearchParams(window.location.search).get(param);
+    if (urlVal) {
+      sessionStorage.setItem('marex_' + param, urlVal);
+      return urlVal;
+    }
+    return sessionStorage.getItem('marex_' + param) || '';
+  } catch (e) {
+    return '';
+  }
+};
+
