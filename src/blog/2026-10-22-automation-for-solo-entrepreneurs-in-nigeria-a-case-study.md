@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "Automation for Solo Entrepreneurs in Nigeria: A Case Study"
 date: 2026-10-22T10:01:00.000+01:00
 image: /assets/images/automation-solo-entrepreneurs-nigeria.png
