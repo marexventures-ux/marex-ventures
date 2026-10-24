@@ -2,6 +2,7 @@
 draft: true
 title: "Automation for Solo Entrepreneurs in Nigeria: A Case Study"
 date: 2026-10-22T10:01:00.000+01:00
+image: /assets/images/automation-solo-entrepreneurs-nigeria.png
 category: Case Studies
 description: See how a solo founder can use business automation to organise
   leads, client onboarding, proposals, invoices and project delivery.
@@ -37,6 +38,8 @@ The Marex Business Operating System is an internal system built to help organise
 
 Rather than treating lead generation, sales, onboarding, invoicing and project delivery as completely separate activities, the system brings them into a connected business workflow.
 
+![Marex Business Operating System dashboard showing leads, pipeline value, projects and revenue](/assets/images/marex-business-operating-system-dashboard.png)
+
 Its dashboard provides an overview of important business information, including:
 
 * Total leads and closed leads
@@ -56,6 +59,8 @@ A business cannot grow consistently if finding potential clients depends entirel
 
 The Lead Hunter helps identify prospects based on selected criteria, including industry, business type, region, business size, search terms and the number of prospects to find. It also includes a LinkedIn search option.
 
+![Lead Tracker organizing prospects, deal stages and follow-up actions](/assets/images/marex-business-operating-system-lead-tracker.png)
+
 After identifying a suitable prospect, the information can move into the Lead Tracker.
 
 The tracker records details such as:
@@ -69,13 +74,13 @@ The tracker records details such as:
 
 An AI-assisted action suggestion feature can help identify possible next steps for a lead.
 
-This creates a more organised process: prospects can be researched, recorded and followed up on instead of remaining in a collection of browser tabs or scattered notes.
+This creates a more organized process: prospects can be researched, recorded and followed up on instead of remaining in a collection of browser tabs or scattered notes.
 
 For a solo entrepreneur, this matters because finding a lead is only the beginning. There must also be a reliable way to manage what happens next.
 
 ## 2. Moving from a Lead to Client Onboarding
 
-When a prospect becomes a client, the business needs to move from sales conversations to organised delivery.
+When a prospect becomes a client, the business needs to move from sales conversations to organized delivery.
 
 The Marex Business Operating System includes a Start Onboarding function that transfers lead information into the client onboarding process.
 
@@ -119,9 +124,11 @@ A structured process makes it easier to see what has been sent, what is due and 
 
 Winning a client is not the end of the business process. The agreed work must be delivered, reviewed and completed.
 
+![Delivery Tracker showing project milestones and progress](/assets/images/marex-business-operating-system-delivery-tracker.png)
+
 In the Marex Business Operating System, the Start Delivery function moves a project into the Delivery Tracker after the initial payment is received.
 
-The Delivery Tracker helps organise project milestones and progress.
+The Delivery Tracker helps organize project milestones and progress.
 
 As work moves through the agreed stages, the entrepreneur can monitor what has been completed and what remains outstanding. Where the project agreement requires another payment before the next phase, a milestone can also prompt the next invoice.
 
