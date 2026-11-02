@@ -71,7 +71,7 @@ description: ""
 
       <script>
         // Webhook configuration (configured in one setting at top of code)
-        const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/3r6hgtonqoq6bq4ppb3vdpc33m7bu38e';
+        const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/4x2dc1fdnz2h87wk986grrmxfu3aozgu';
 
         document.addEventListener('DOMContentLoaded', function() {
           const form = document.getElementById('consultation-form');
@@ -127,6 +127,12 @@ description: ""
               name: name,
               email: email,
               phone: phone,
+              company: '',
+              staff_count: '',
+              industry: '',
+              departments: '',
+              issue: '',
+              start_month: '',
               service: service,
               message: message,
               consent_updates: consentUpdates,
@@ -142,18 +148,30 @@ description: ""
             submitBtn.innerHTML = 'Submitting...';
 
             try {
-              const response = await fetch(MAKE_WEBHOOK_URL, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-              });
+              let response;
+              try {
+                response = await fetch(MAKE_WEBHOOK_URL, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+                });
+              } catch (directErr) {
+                // If browser blocks request (e.g. CORS error), forward via Netlify function
+                response = await fetch('/.netlify/functions/submit-webhook', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+                });
+              }
 
-              if (response.ok || (response.status >= 200 && response.status < 300)) {
+              if (response && (response.ok || (response.status >= 200 && response.status < 300))) {
                 window.location.href = '/thank-you/';
               } else {
-                throw new Error('Webhook responded with status ' + response.status);
+                throw new Error('Webhook responded with status ' + (response ? response.status : 'No response'));
               }
             } catch (err) {
               showError('Something went wrong. Please email us at <a href="mailto:hello@marexventures.com" style="color: inherit; text-decoration: underline;">hello@marexventures.com</a>');
