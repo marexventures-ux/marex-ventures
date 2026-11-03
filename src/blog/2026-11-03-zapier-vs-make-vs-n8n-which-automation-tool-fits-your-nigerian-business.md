@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 title: "Zapier vs Make vs n8n: Which Automation Tool Fits Your Nigerian Business?"
 date: 2026-11-03T13:54:00.000+01:00
 image: /assets/images/zapier-vs-make-vs-n8n-comparison-for-business-automation-in-nigeria.png
