@@ -1,7 +1,8 @@
 ---
-draft: true
+draft: false
 title: Why Self-Hosted Automation Matters for Security-Conscious Nigerian Businesses
 date: 2026-11-05T12:08:00.000+01:00
+image: /assets/images/elf-hosted-automation-workflow-showing-business-data-moving-between-connected-systems.png
 category: Business Automation
 description: Discover how self-hosted automation gives Nigerian businesses
   greater control over their workflows and data, and what to consider before
